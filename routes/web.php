@@ -94,7 +94,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::post('view-video', 'JobController@viewVideo')->name('view-video');
 
     Route::group(['prefix' => 'recruiter', 'as' => 'recruiter.'], function () {
-        Route::get('get-data', 'UserController@getData')->name('get-data');
+        // Route::get('get-data', 'UserController@getData')->name('get-data');
 
         Route::get('login', 'RegisterController@loginV2')->name('login');
         Route::post('login', 'RegisterController@loginV2Save')->name('save-login');
@@ -116,6 +116,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
             Route::get('cms-index', 'CmsController@cmsIndexData')->name('cms-index');
             Route::get('cms-data/{id}', 'CmsController@cmsData')->name('cms-data');
+
+            // Subscription routes
+            Route::get('subscription', 'SubscriptionController@subscriptionList')->name('subscription');
+            // Route::get('subscription', 'SubscriptionController@subscriptionAdd')->name('subscription');
 
             Route::get('faq-data', 'FaqController@faqIndexData')->name('faq-data');
 

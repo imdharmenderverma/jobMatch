@@ -33,13 +33,13 @@
 					</a>
 				</li>
 
-				{{-- <li class="nav-item {{ request()->is('recruiter/manage-subscription') ? 'active' : '' }}">
-					<a href="{{ route('recruiter.manage-subscription') }}" class="d-flex justify-content-center">
-						<img src="{{asset('assets/img/menuimgs/list.png')}}" class="baseMenuImg">
-						<img src="{{asset('assets/img/menuimgs/list_live.png')}}" class="liveMenuImg">
+				<li class="nav-item {{ request()->is('recruiter/subscription') ? 'active' : '' }}">
+					<a href="{{ route('recruiter.subscription') }}" class="d-flex justify-content-center">
+						<img src="{{asset('assets/img/menuimgs/subscribe_live.png')}}" class="baseMenuImg">
+						<img src="{{asset('assets/img/menuimgs/subscribe.png')}}" class="liveMenuImg">
 						<span class="mobileMenuCap">Static Content</span>
 					</a>
-				</li> --}}
+				</li>
 				<li class="nav-item {{ request()->is('recruiter/faq-data') ? 'active' : '' }}">
 					<a href="{{ route('recruiter.faq-data') }}">
 						<img src="{{asset('assets/img/menuimgs/question.png')}}" class="baseMenuImg">

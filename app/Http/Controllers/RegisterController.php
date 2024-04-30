@@ -51,17 +51,17 @@ class RegisterController extends Controller
         $emailPassword['is_email_verified'] = Recruiter::IS_EMAIL_VERIFIED;
         if (Auth::guard('recruiter')->attempt($emailPassword)) {
             $user = Auth::guard('recruiter')->user();
-            if ($user->status == 1) {
+            if ($user->status != 1) {
                 // User is blocked, return blocked message
                 return $this->sendResponse(false, [], trans('messages.custom.user_blocked_message'), $this->failedStatus);
             }
+            // return redirect()->route('recruiter.dashboard');
             // User login successful
             return $this->sendResponse(true, [], trans('messages.custom.login_messages'), $this->successStatus);
         }
         // Invalid credentials
         return $this->sendResponse(false, [], trans('messages.custom.invalid_credential'), $this->failedStatus);
     }
-
 
     public function signUpV1(RegisterV1Request $request)
     {

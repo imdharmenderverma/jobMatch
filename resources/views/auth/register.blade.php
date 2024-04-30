@@ -189,6 +189,13 @@
     .create-account-form {
         position: relative;
     }
+
+    @media only screen and (max-width: 768px){
+        .titleTypeWrapper {
+        display: inline-block !important;
+        }
+    }
+    
 </style>
 <div class="container align-items-center d-flex justify-content-center wrapper register-main">
     <div class="right">
@@ -236,10 +243,11 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <!-- <div class="cust-drop-position"> -->
                                 <nav id="top-nav" class="cust-menu-main">
                                     <ul>
                                         <li class="cust-drop-li">
-                                            <input type="hidden" name="industry_id" id="industry_id" required>
+                                            <input type="hidden" name="industry_id" id="industry_id">
                                             <a href="#" class="cust-drop-main-link">
                                                 <div class="add_name">Select Industry</div><span>
                                                     <img src="{{asset('assets/img/down-arrow-white.svg')}}" class="cust-drop-arrow" />
@@ -255,9 +263,7 @@
                                                     </a>
                                                     <ul class="cust-drop-ul inner-content-menu">
                                                         @foreach ($data->childrens as $child)
-                                                        <li class="cust-drop-li">
-                                                            <a href="#" data-parsley-required="true" data-parsley-required-message="Please select industry" data-parsley-errors-container="#industry_error" class="cust-inner-drop-link cust-inner-drop-link1" value="{{ $child->id }}">{{ $child->title }}</a>
-                                                        </li>
+                                                        <li class="cust-drop-li ml-3"><a href="#" data-parsley-required="true" data-parsley-required-message="Please select industry"   data-parsley-errors-container="#industry_error" class="cust-inner-drop-link cust-inner-drop-link1" value="{{ $child->id }}">{{ $child->title }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
@@ -268,15 +274,34 @@
                                     <span id="industry_error" class="text-danger"></span>
                                 </nav>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="form-group login-input-size">
                                     <input type="hidden" id="state" name="address_state" class="state">
-                                    <input type="text" class="form-control" id="location" name="address" placeholder="Address" required data-parsley-required-message="Please enter address" data-parsley-errors-container='#address_error'>
+                                    <input type="text" class="form-control" id="location" name="address"
+                                        placeholder="Address" required
+                                        data-parsley-required-message="Please enter address"
+                                        data-parsley-errors-container='#address_error'>
                                     <span id="address_error" class="text-danger"></span>
                                 </div>
+                                <div class="form-group login-input-size ml-3">
+                                    <span class="typeTitle">Type:</span>
+                                    <div class="titleTypeWrapper ml-2"><input class="business" type="radio"
+                                            name="type" id="business" name="type" value="1"
+                                            placeholder="Address" required
+                                            data-parsley-required-message="Please select type"
+                                            data-parsley-errors-container='#type_error'><label
+                                            for="business"></label><span>Business</span></div>
+
+                                    <div class="titleTypeWrapper"><input class="recruiter" type="radio"
+                                            name="type" id="recruiter" value="2" name="type"><label
+                                            for="recruiter"></label><span>Recruiter</span></div>
+                                    <span id="type_error" class="text-danger"></span>
+                                </div>
+                                <button class="btn btn-primary btn-block floatRight" type="submit"
+                                    id="myButtonV1">Next</button>
                             </div>
-                            <div class="col-md-6"></div>
+                            {{-- <div class="col-md-6"></div>
                             <div class="col-md-6">
                                 <div class="form-group login-input-size ml-3">
                                     <span class="typeTitle">Type:</span>
@@ -290,7 +315,7 @@
                             </div>
                             <div class="col-md-6 text-right">
                                 <button class="btn btn-primary btn-block floatRight" type="submit" id="myButtonV1">Next</button>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
                 </div>

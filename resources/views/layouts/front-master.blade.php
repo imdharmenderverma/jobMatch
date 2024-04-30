@@ -308,20 +308,25 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group create-acc-select sizing-add-job custom-align-left">
-                                            <input type="text" class="form-control" id="role_name" name="role_name"
-                                                placeholder="Role Name:" maxlength="25">
+                                            <input type="text" class="form-control" id="role_name"
+                                                name="role_name" placeholder="Role Name:" maxlength="25">
                                             <span class="text-danger parsley-required" id="role-name-error"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-5">
                                         <div class="form-group create-acc-select sizing-add-job">
-                                            <input type="text" class="form-control" id="company_name" name="company_name"
-                                                placeholder="Company Name:" maxlength="25">
+                                            <input type="text" class="form-control" id="company_name"
+                                                name="company_name" placeholder="Company Name:" maxlength="25">
                                             <span class="text-danger parsley-required" id="company-name-error"></span>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
-                                        <button id="myButton" class="button-post save-btn">Post Job</button>
+                                        <button id="myButton" class="button-post save-btn mb-1">Post Job</button>
+                                        {{-- <button id="" class="button-post save-btn">Back</button> --}}
+                                        <button type="button" class="button-post save-btn"
+                                            data-dismiss="modal" aria-label="Clxose" style="background: #0d8282">
+                                            Back
+                                        </button>
                                     </div>
                                 </div>
                             </div>
