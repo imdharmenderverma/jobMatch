@@ -34,6 +34,14 @@
                     </a>
                 </li>
 
+                <li class="nav-item {{ request()->is('admin/subscription') ? 'active' : '' }}">
+					<a href="{{ route('admin.subscription') }}" class="d-flex justify-content-center">
+						<img src="{{asset('assets/img/menuimgs/subscribe_live.png')}}" class="baseMenuImg">
+						<img src="{{asset('assets/img/menuimgs/subscribe.png')}}" class="liveMenuImg">
+						<span class="mobileMenuCap">Subscription</span>
+					</a>
+				</li>
+
                 <li class="nav-item {{ request()->is('admin/faq') ? 'active' : '' }}">
                     <a href="{{ route('admin.faq.index') }}" class="d-flex justify-content-center">
                         <img src="{{ asset('assets/img/menuimgs/question.png') }}" class="baseMenuImg">

@@ -37,7 +37,7 @@
 					<a href="{{ route('recruiter.subscription') }}" class="d-flex justify-content-center">
 						<img src="{{asset('assets/img/menuimgs/subscribe_live.png')}}" class="baseMenuImg">
 						<img src="{{asset('assets/img/menuimgs/subscribe.png')}}" class="liveMenuImg">
-						<span class="mobileMenuCap">Static Content</span>
+						<span class="mobileMenuCap">Subscription</span>
 					</a>
 				</li>
 				<li class="nav-item {{ request()->is('recruiter/faq-data') ? 'active' : '' }}">

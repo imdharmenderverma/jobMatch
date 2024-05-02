@@ -86,6 +86,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('cms-index', 'CmsController@cmsIndex')->name('cms-index');
         Route::get('cms-data/{id}', 'CmsController@cmsData')->name('cms-data');
         Route::post('logout', 'RegisterController@logout')->name('logout');
+
+
+        // Subscription routes
+        Route::get('subscription', 'SubscriptionController@subscriptionListData')->name('subscription');
     });
 
     Route::post('view-resume', 'JobController@viewResume')->name('view-resume');
