@@ -72,14 +72,15 @@
                                                                     <td>
                                                                         <div class="img-div">
                                                                             <img src="http://127.0.0.1:8000/assets/img/editjob.png"
-                                                                                data-skill="1" data-id="1"
+                                                                                data-skill="1"
+                                                                                data-id="{{ $subscriptionList->id }}"
                                                                                 data-title="I concisely explain project details to clients."
-                                                                                data-page="1" data-statement="1"
-                                                                                class="jobDelete edit-statement action-icon"
+                                                                                data-page="1"
+                                                                                data-subscription="{{ $subscriptionList->id }}"
+                                                                                class="jobDelete edit-subscription action-icon"
                                                                                 data-bs-toggle="modal"
                                                                                 data-bs-target="#Update-subscription-modal"
-                                                                                style="cursor: pointer"
-                                                                                onclick="updateSubscription({{ $subscriptionList->id }})">
+                                                                                style="cursor: pointer">
 
                                                                             <img src="http://127.0.0.1:8000/assets/img/deletejob.png"
                                                                                 data-id="1"

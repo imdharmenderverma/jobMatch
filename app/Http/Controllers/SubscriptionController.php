@@ -45,7 +45,7 @@ class SubscriptionController extends Controller
                     'status' => true,
                     'errors' => [],
                     $this->successStatus
-                ]);                
+                ]);
                 // return response()->json([true, trans(
                 //     'messages.custom.create_messages',
                 //     ["attribute" => "Job"]
@@ -64,23 +64,39 @@ class SubscriptionController extends Controller
     }
 
     //Edit method
-    public function subscriptionEdit(Request $request, $id){
+    public function subscriptionEdit(Request $request, $id)
+    {
         $data = Subscription::find($id);
 
         return response()->json($data);
     }
 
     //Delete Method
-    public function subscriptionDelete(Request $request){
-        $subscribeDelete = Subscription::where('id', $request->subscriptionId)->delete();
-        return response()->json([
-            'status' => true,
-            'data' => $subscribeDelete
-        ]);
+    public function subscriptionDelete(Request $request)
+    {
+        try {
+
+            Subscription::where('id', $request->subscriptionId)->delete();
+
+            // return response()->json([
+            //     'status' => true,
+            //     'data' => $subscribeDelete
+            // ]);
+
+            return $this->sendResponse(true, ['data' => []], trans(
+                'messages.custom.delete_messages',
+                ["attribute" => "Subscription Plan"]
+            ), $this->successStatus);
+
+        } catch (\Exception $e) {
+            return $this->sendResponse(false, [], trans(
+                'messages.custom.error_messages'), $this->errorStatus);
+        }
     }
 
     //Get single data
-    public function getUserDetails($userId) {
+    public function getUserDetails($userId)
+    {
         $user = Subscription::find($userId); // Assuming User is your model
         return response()->json($user);
     }
