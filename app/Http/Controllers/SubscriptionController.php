@@ -66,7 +66,7 @@ class SubscriptionController extends Controller
     //Edit method
     public function subscriptionEdit(Request $request, $id)
     {
-        $data = Subscription::find($id);
+        $data = Subscription::findOrFail($id);
 
         return response()->json($data);
     }

@@ -50,7 +50,28 @@ $(document).ready(function () {
 //Edit ajax logic
 $(document).on("click", ".edit-subscription", function () {
     var subscription_id = $(this).attr("data-id");
-    // alert(subscription_id);
+
+    // Show the modal
+    $("#Update-subscription-modal").modal("show");
+
+    // Send AJAX request to get subscription data
+    $.ajax({
+        url: "/admin/subscription-edit/" + subscription_id,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            // Populate form fields with retrieved data
+            $("#subs_id").val(response.id);
+            $("#get_plan_name").val(response.plan_name);
+            $("#plan_type").val(response.plan_type);
+            $("#get_plan_price").val(response.price);
+            $("#get_plan_description").val(response.description);
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+            // Handle error, show error message, etc.
+        },
+    });
 });
 
 // Delete Ajax logic old
@@ -87,14 +108,13 @@ $(document).on("click", ".edit-subscription", function () {
 //     });
 // }
 
-
 // Check if there is any toastr message stored in session storage
-$(document).ready(function() {
-    var toastrMessage = sessionStorage.getItem('toastrMessage');
+$(document).ready(function () {
+    var toastrMessage = sessionStorage.getItem("toastrMessage");
     if (toastrMessage) {
         toastr.success(toastrMessage);
         // Clear the stored toastr message
-        sessionStorage.removeItem('toastrMessage');
+        sessionStorage.removeItem("toastrMessage");
     }
 });
 
@@ -119,7 +139,7 @@ function deleteSubscription(subscriptionId) {
                         var message = response.message;
                         toastr.success(message);
                         // Store the toastr message in session storage
-                        sessionStorage.setItem('toastrMessage', message);
+                        sessionStorage.setItem("toastrMessage", message);
                         // Refresh the page
                         location.reload();
                     } else {
@@ -133,4 +153,3 @@ function deleteSubscription(subscriptionId) {
         }
     });
 }
-

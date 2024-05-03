@@ -72,14 +72,9 @@
                                                                     <td>
                                                                         <div class="img-div">
                                                                             <img src="http://127.0.0.1:8000/assets/img/editjob.png"
-                                                                                data-skill="1"
                                                                                 data-id="{{ $subscriptionList->id }}"
-                                                                                data-title="I concisely explain project details to clients."
-                                                                                data-page="1"
-                                                                                data-subscription="{{ $subscriptionList->id }}"
                                                                                 class="jobDelete edit-subscription action-icon"
-                                                                                data-bs-toggle="modal"
-                                                                                data-bs-target="#Update-subscription-modal"
+                                                                                {{-- data-bs-target="#Update-subscription-modal" --}}
                                                                                 style="cursor: pointer">
 
                                                                             <img src="http://127.0.0.1:8000/assets/img/deletejob.png"
@@ -229,16 +224,16 @@
                                         </button>
                                     </div>
                                 </div>
-                                <form id="updateSubscription-form" method="PUT">
+                                <form id="updateSubscription-form" method="PUT" action="{{'update-subscription'}}">
                                     @csrf
-                                    {{-- <input type="hidden" id="id" name="id"> --}}
+                                    <input type="hidden" id="subs_id" name="subs_id">
                                     <div class="modal-body">
                                         <div class="row pr-3 pl-3">
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control skill-input"
-                                                        name="plan_name" id="plan_name" placeholder="Enter Plan Name"
-                                                        value="">
+                                                        name="get_plan_name" id="get_plan_name" placeholder="Enter Plan Name"
+                                                        >
                                                     <p></p>
                                                     {{-- <span class="text-danger parsley-required title-error-statement"
                                                         id="title-error">{{ $errors->first('title') }}</span> --}}
@@ -253,18 +248,19 @@
                                                     <span class="typeTitle">Plan Type :</span>
 
                                                     <div class="titleTypeWrapper ml-3">
-                                                        <input class="business" type="radio" name="soft_skill_type"
-                                                            id="business" value="1" placeholder="Address" required
+                                                        <input class="business" type="radio" name="plan_type"
+                                                            id="monthly" value="1" placeholder="Address" required
                                                             checked data-parsley-required-message="Please Select Type"
                                                             data-parsley-errors-container='#type_error'><label
-                                                            for="business "></label><span class="ml-1">Monthly </span>
+                                                            for="monthly "></label><span class="ml-1">Monthly </span>
 
                                                         <input class="lifestyle ml-3" type="radio"
-                                                            name="soft_skill_type" id="lifestyle" value="2"><label
-                                                            for="lifestyle"></label><span class="ml-1">Yearly</span>
+                                                            name="plan_type" id="yearly" value="2"><label
+                                                            for="yearly"></label><span class="ml-1">Yearly</span>
                                                     </div>
+                                                    <p></p>
 
-                                                    <span id="type_error" class="text-danger"></span>
+                                                    {{-- <span id="type_error" class="text-danger"></span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -273,9 +269,10 @@
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
                                                     <input type="Integer" class="form-control skill-input"
-                                                        name="plan_price" id="plan_price" placeholder="Enter Plan Price">
-                                                    <span class="text-danger parsley-required title-error-statement"
-                                                        id="title-error">{{ $errors->first('title') }}</span>
+                                                        name="get_plan_price" id="get_plan_price" placeholder="Enter Plan Price">
+                                                    <p></p>
+                                                    {{-- <span class="text-danger parsley-required title-error-statement"
+                                                        id="title-error">{{ $errors->first('title') }}</span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -283,7 +280,7 @@
                                         <div class="row pr-3 pl-3">
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
-                                                    <textarea class="form-control" name="plan_description" id="plan_description" placeholder="Description"
+                                                    <textarea class="form-control" name="get_plan_description" id="get_plan_description" placeholder="Description"
                                                         rows="4"></textarea>
                                                 </div>
                                             </div>
