@@ -53,7 +53,51 @@ $(document).on("click", ".edit-subscription", function () {
     // alert(subscription_id);
 });
 
-// Delete Ajax logic
+// Delete Ajax logic old
+// function deleteSubscription(subscriptionId) {
+//     swal({
+//         text: "Are you sure you want to delete?",
+//         icon: "warning",
+//         buttons: true,
+//         dangerMode: true,
+//         closeOnClickOutside: false,
+//     }).then((willDelete) => {
+//         if (willDelete) {
+//             $.ajax({
+//                 url: subscribeDelete,
+//                 type: "post",
+//                 data: {
+//                     subscriptionId: subscriptionId,
+//                 },
+//                 dataType: "json",
+//                 success: function (response) {
+//                     if (response.success) {
+//                         toastr.success(response.message);
+//                         // window.location.href = Subscribe;
+//                         table.draw();
+//                     } else {
+//                         toastr.error(response.message);
+//                     }
+//                 },
+//                 error: function (response) {
+//                     toastr.error(response.responseJSON.message);
+//                 },
+//             });
+//         }
+//     });
+// }
+
+
+// Check if there is any toastr message stored in session storage
+$(document).ready(function() {
+    var toastrMessage = sessionStorage.getItem('toastrMessage');
+    if (toastrMessage) {
+        toastr.success(toastrMessage);
+        // Clear the stored toastr message
+        sessionStorage.removeItem('toastrMessage');
+    }
+});
+
 function deleteSubscription(subscriptionId) {
     swal({
         text: "Are you sure you want to delete?",
@@ -72,9 +116,12 @@ function deleteSubscription(subscriptionId) {
                 dataType: "json",
                 success: function (response) {
                     if (response.success) {
-                        toastr.success(response.message);
-                        // window.location.href = Subscribe;
-                        table.draw();
+                        var message = response.message;
+                        toastr.success(message);
+                        // Store the toastr message in session storage
+                        sessionStorage.setItem('toastrMessage', message);
+                        // Refresh the page
+                        location.reload();
                     } else {
                         toastr.error(response.message);
                     }
@@ -87,37 +134,3 @@ function deleteSubscription(subscriptionId) {
     });
 }
 
-// $("body").on("click", ".delete-subscription", function () {
-//     var id = $(this).data("id");
-//     var formData = new FormData();
-//     formData.append('user_id', id);
-//     swal({
-//         text: "Are you sure you want to delete record?",
-//         icon: "warning",
-//         buttons: true,
-//         dangerMode: true,
-//         closeOnClickOutside: false,
-//     }).then((willDelete) => {
-//         if (willDelete) {
-//             $.ajax({
-//                 url: subscribeDelete + "/" + id,
-//                 type: "DELETE",
-//                 data: formData,
-//                 cache: false,
-//                 contentType: false,
-//                 processData: false,
-//                 success: function (data) {
-//                     if (data.success) {
-//                         toastr.success(data.message);
-//                         table.draw();
-//                     } else {
-//                         toastr.error(data.message);
-//                     }
-//                 },
-//                 error: function (data) {
-//                     toastr.error(data.responseJSON.message);
-//                 },
-//             });
-//         }
-//     });
-// });
