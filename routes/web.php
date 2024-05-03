@@ -65,8 +65,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('get-user-profile', 'AppUserController@getProfile')->name('get-user-profile');
         Route::post('update-recruiter-status', 'UserController@updateStatus')->name('update-recruiter-status');
 
-
-
         Route::resource('skill', SkillController::class);
         Route::resource('industries', IndustryController::class);
         Route::resource('statement', StatementController::class);
@@ -87,9 +85,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('cms-data/{id}', 'CmsController@cmsData')->name('cms-data');
         Route::post('logout', 'RegisterController@logout')->name('logout');
 
-
         // Subscription routes
         Route::get('subscription', 'SubscriptionController@subscriptionListData')->name('subscription');
+        Route::post('subscription-store', 'SubscriptionController@subscriptionStore')->name('subscribe.store');
+        Route::get('subscription-edit/{id}', 'SubscriptionController@subscriptionEdit')->name('subscribe.edit');
+        Route::put('subscription-update/{id}', 'SubscriptionController@subscriptionUpdate')->name('subscribe.update');
+        Route::post('/subscription-delete', 'SubscriptionController@subscriptionDelete')->name('subscribe.delete');
     });
 
     Route::post('view-resume', 'JobController@viewResume')->name('view-resume');

@@ -130,6 +130,7 @@ $(document).ready(function () {
             }
         });
     });
+    
     $("body").on("click", ".edit-statement", function () {
         var id = $(this).data('id');
         var title = $(this).data('title');
@@ -146,6 +147,7 @@ $(document).ready(function () {
         $(".save-btn").val('Update');
         $("#add-statement-modal").modal('show');
     })
+
     $("body").on("click", ".delete-statement", function () {
         var id = $(this).data("id");
         var formData = new FormData();

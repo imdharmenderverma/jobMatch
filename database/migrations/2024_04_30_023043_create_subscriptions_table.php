@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('duration');
+            // $table->integer('user_id');
+            $table->string('plan_name');
+            $table->string('plan_type');
             $table->decimal('price', 10, 2);
+            // $table->decimal('montly_price', 10, 2);
+            // $table->decimal('yearly_price', 10, 2);
             $table->text('description')->nullable();
+            $table->text('static_content')->nullable();
             $table->integer('status')->default(1);
             $table->timestamps();
         });

@@ -49,10 +49,7 @@ class SkillController extends Controller
     {
         try {
             $data = $this->skillRepository->store($request->all());
-            return $this->sendResponse(true, $data, trans(
-                'messages.custom.create_messages',
-                ["attribute" => "Skill"]
-            ), $this->successStatus);
+            return $this->sendResponse(true, $data, trans('messages.custom.create_messages', ["attribute" => "Skill"]), $this->successStatus);
         } catch (\Exception $e) {
             return $this->sendResponse(false, [], trans(
                 'messages.custom.error_messages'
