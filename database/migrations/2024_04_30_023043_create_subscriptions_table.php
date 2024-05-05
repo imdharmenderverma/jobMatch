@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             // $table->integer('user_id');
             $table->string('plan_name');
-            $table->string('plan_type');
-            $table->decimal('price', 10, 2);
-            // $table->decimal('montly_price', 10, 2);
-            // $table->decimal('yearly_price', 10, 2);
+            // $table->string('plan_type');
+            // $table->decimal('price', 10, 2);
+            $table->decimal('montly_price', 10, 2)->nullable();
+            $table->decimal('yearly_price', 10, 2)->nullable();
             $table->text('description')->nullable();
             $table->text('static_content')->nullable();
             $table->integer('status')->default(1);

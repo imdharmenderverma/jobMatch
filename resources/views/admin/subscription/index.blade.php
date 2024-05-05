@@ -47,7 +47,8 @@
                                                         <tr style="color: #3a8081;">
                                                             <th scope="col">S.No.</th>
                                                             <th scope="col">Plan Name</th>
-                                                            <th scope="col">Plan Price</th>
+                                                            <th scope="col">Monthly Price</th>
+                                                            <th scope="col">Yearly Price</th>
                                                             <th scope="col">Description</th>
                                                             <th scope="col">Status</th>
                                                             <th scope="col">Action</th>
@@ -57,15 +58,16 @@
                                                         @if ($subscriptionLists->isNotEmpty())
                                                             @foreach ($subscriptionLists as $subscriptionList)
                                                                 <tr>
-                                                                    <td>1</td>
+                                                                    <td>{{ $loop->iteration }}</td>
                                                                     <td>{{ $subscriptionList->plan_name }}</td>
-                                                                    <td>{{ $subscriptionList->price }}</td>
+                                                                    <td>{{ $subscriptionList->montly_price != null ? $subscriptionList->montly_price : 0}}</td>
+                                                                    <td>{{ $subscriptionList->yearly_price != null ? $subscriptionList->yearly_price : 0}}</td>
                                                                     <td>{{ Str::words($subscriptionList->description, $words = 8, '...') }}
                                                                     </td>
                                                                     <td>
                                                                         <label class="switch">
-                                                                            <input type="checkbox" class="recruiter-status"
-                                                                                data-id="57" data-val="0">
+                                                                            <input type="checkbox" class="subscription-status"
+                                                                                data-id="{{ $subscriptionList->id }}" data-val="{{$subscriptionList->status}}" {{ $subscriptionList->status == 0 ? 'checked' : '' }}>
                                                                             <span class="slider round"></span>
                                                                         </label>
                                                                     </td>
@@ -136,7 +138,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row pr-3 pl-3">
+                                        {{-- <div class="row pr-3 pl-3">
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group type-title-space">
                                                     <span class="typeTitle">Plan Type :</span>
@@ -156,16 +158,21 @@
                                                     <p></p>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="row pr-3 pl-3">
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
                                                     <input type="Integer" class="form-control skill-input"
-                                                        name="plan_price" id="plan_price" placeholder="Enter Plan Price">
-                                                    <p></p>
-                                                    {{-- <span class="text-danger parsley-required title-error-statement"
-                                                        id="plan_price-error">{{ $errors->first('plan_price') }}</span> --}}
+                                                        name="monthly_price" id="monthly_price" placeholder="Montly Plan Price">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pr-3 pl-3">
+                                            <div class="col-md-12 pl-0 pr-0">
+                                                <div class="form-group">
+                                                    <input type="Integer" class="form-control skill-input"
+                                                        name="yearly_price" id="yearly_price" placeholder="Yearly Plan Price">
                                                 </div>
                                             </div>
                                         </div>
@@ -232,35 +239,17 @@
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control skill-input"
-                                                        name="get_plan_name" id="get_plan_name" placeholder="Enter Plan Name"
-                                                        >
+                                                        name="get_plan_name" id="get_plan_name" placeholder="Enter Plan Name">
                                                     <p></p>
-                                                    {{-- <span class="text-danger parsley-required title-error-statement"
-                                                        id="title-error">{{ $errors->first('title') }}</span> --}}
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row pr-3 pl-3">
                                             <div class="col-md-12 pl-0 pr-0">
-                                                <div class="form-group type-title-space">
-
-                                                    <span class="typeTitle">Plan Type :</span>
-
-                                                    <div class="titleTypeWrapper ml-3">
-                                                        <input class="business" type="radio" name="plan_type"
-                                                            id="monthly" value="1" placeholder="Address" required
-                                                            checked data-parsley-required-message="Please Select Type"
-                                                            data-parsley-errors-container='#type_error'><label
-                                                            for="monthly "></label><span class="ml-1">Monthly </span>
-
-                                                        <input class="lifestyle ml-3" type="radio"
-                                                            name="plan_type" id="yearly" value="2"><label
-                                                            for="yearly"></label><span class="ml-1">Yearly</span>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <input type="Integer" class="form-control skill-input"
+                                                        name="get_monthly_price" id="get_monthly_price" placeholder="Montly Plan Price">
                                                     <p></p>
-
-                                                    {{-- <span id="type_error" class="text-danger"></span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -269,10 +258,8 @@
                                             <div class="col-md-12 pl-0 pr-0">
                                                 <div class="form-group">
                                                     <input type="Integer" class="form-control skill-input"
-                                                        name="get_plan_price" id="get_plan_price" placeholder="Enter Plan Price">
+                                                        name="get_yearly_price" id="get_yearly_price" placeholder="Yearly Plan Price">
                                                     <p></p>
-                                                    {{-- <span class="text-danger parsley-required title-error-statement"
-                                                        id="title-error">{{ $errors->first('title') }}</span> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -288,19 +275,14 @@
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-action m-3">
-                                                    {{-- <button id="myButton" class="button save-btn">Cancel</button> --}}
                                                     <button type="button" class="button save-btn"
                                                         data-bs-dismiss="modal">Close</button>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-action m-3">
-                                                    {{-- <button id="myButton" class="button save-btn">Cancel</button> --}}
-                                                    {{-- <button type="button" class="button save-btn"
-                                                        data-bs-dismiss="modal">Close</button> --}}
                                                     <input type="submit" name="submit"
                                                         class="postJobBtn save-btn border-0" value="Update">
-
                                                 </div>
                                             </div>
                                         </div>
@@ -320,7 +302,8 @@
     <script>
         var storeSubscribe = `{{ route('admin.subscribe.store') }}`;
         var Subscribe = `{{ route('admin.subscription') }}`;
-        var subscribeDelete = `{{ route('admin.subscribe.delete') }}`
+        var subscribeDelete = `{{ route('admin.subscribe.delete') }}`;
+        var updateStatus = `{{ route('admin.status.update')}}`;
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">

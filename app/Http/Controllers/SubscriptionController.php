@@ -11,7 +11,7 @@ class SubscriptionController extends Controller
     // Admin Methods
     public function subscriptionListData()
     {
-        $subscriptionLists = Subscription::where('status', 1)->orderBy('created_at', 'DESC')->get();
+        $subscriptionLists = Subscription::orderBy('created_at', 'DESC')->get();
 
         return view('admin.subscription.index', compact('subscriptionLists'));
     }
@@ -21,8 +21,8 @@ class SubscriptionController extends Controller
         try {
             $rules = [
                 'plan_name' => 'required|min:4|max:20',
-                'plan_type' => 'required|string',
-                'plan_price' => 'required|integer',
+                // 'plan_type' => 'required|string',
+                // 'plan_price' => 'required|integer',
                 'plan_description' => 'required'
             ];
 
@@ -32,24 +32,22 @@ class SubscriptionController extends Controller
             if ($validator->passes()) {
                 $subscribPlan = new Subscription();
                 $subscribPlan->plan_name = $request->plan_name;
-                $subscribPlan->plan_type = $request->plan_type;
-                $subscribPlan->price = $request->plan_price;
+                $subscribPlan->montly_price = $request->monthly_price;
+                $subscribPlan->yearly_price = $request->yearly_price;
                 $subscribPlan->description = $request->plan_description;
                 $subscribPlan->save();
 
-                // $message = trans('messages.custom.error_messages', ['attribute' => "Subscription"]);
                 // return $this->sendResponse(true, $subscribPlan, $message, $this->successStatus);
 
                 return response()->json([
-                    'message' => 'Form submitted successfully',
+                    'message' => 'Subscription Pland Added Successfully.',
                     'status' => true,
                     'errors' => [],
                     $this->successStatus
                 ]);
-                // return response()->json([true, trans(
-                //     'messages.custom.create_messages',
-                //     ["attribute" => "Job"]
-                // ), $this->successStatus]);
+                // return response()->json([true, $message, $this->successStatus]);
+
+                // return $this->sendResponse(true, $message, $this->successStatus);
             } else {
                 return response()->json([
                     'status' => false,
@@ -71,6 +69,45 @@ class SubscriptionController extends Controller
         return response()->json($data);
     }
 
+    // Mehod for update
+    public function subscriptionUpdate(Request $request)
+    {
+        // Validate incoming request data
+        $validator = Validator::make($request->all(), [
+            'get_plan_name' => 'required|min:4|max:20',
+            'get_plan_description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors()->toArray()
+            ]);
+        }
+
+        try {
+            // Update the subscription
+            $subscription = Subscription::findOrFail($request->subs_id);
+            $subscription->plan_name = $request->get_plan_name;
+            $subscription->montly_price = $request->get_monthly_price;
+            $subscription->yearly_price = $request->get_yearly_price;
+            $subscription->description = $request->get_plan_description;
+            $subscription->save();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Subscription Plan updated successfully',
+                'errors' => []
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to update subscription',
+                'errors' => $e->getMessage()
+            ]);
+        }
+    }
+
     //Delete Method
     public function subscriptionDelete(Request $request)
     {
@@ -87,23 +124,35 @@ class SubscriptionController extends Controller
                 'messages.custom.delete_messages',
                 ["attribute" => "Subscription Plan"]
             ), $this->successStatus);
-
         } catch (\Exception $e) {
             return $this->sendResponse(false, [], trans(
-                'messages.custom.error_messages'), $this->errorStatus);
+                'messages.custom.error_messages'
+            ), $this->errorStatus);
         }
     }
-
-    //Get single data
-    public function getUserDetails($userId)
+    //Stauts update
+    public function statusUpdateSubscription(Request $request)
     {
-        $user = Subscription::find($userId); // Assuming User is your model
-        return response()->json($user);
+        $id = $request->input('id');
+        $status = $request->input('status');
+
+        // Update the status in the database
+        Subscription::where('id', $id)->update(['status' => $status]);
+
+        // You can optionally return a response to confirm the status update
+        return response()->json([
+            'message' => 'Status Updated successfully.',
+            'status' => true,
+            'errors' => [],
+            $this->successStatus
+        ]);
+        // return response()->json(['message' => 'Status updated successfully']);
     }
 
     // Recruiter Methods
     public function subscriptionList()
     {
-        return view('recruiter.subscription.index');
+        $subsPlanLists = Subscription::where('status', 1)->orderBy('created_at', 'DESC')->get();
+        return view('recruiter.subscription.index', compact('subsPlanLists'));
     }
 }

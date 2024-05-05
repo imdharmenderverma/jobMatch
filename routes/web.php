@@ -89,7 +89,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('subscription', 'SubscriptionController@subscriptionListData')->name('subscription');
         Route::post('subscription-store', 'SubscriptionController@subscriptionStore')->name('subscribe.store');
         Route::get('/subscription-edit/{id}', 'SubscriptionController@subscriptionEdit')->name('subscription.edit');
-        Route::put('subscription-update/{id}', 'SubscriptionController@subscriptionUpdate')->name('subscribe.update');
+        // Route::put('subscription-update/{id}', 'SubscriptionController@subscriptionUpdate')->name('subscribe.update');
+        Route::put('/subscription-update', 'SubscriptionController@subscriptionUpdate')->name('subscription.update');
+        Route::post('/status-update-subscription', 'SubscriptionController@statusUpdateSubscription')->name('status.update');
+
         Route::post('/subscription-delete', 'SubscriptionController@subscriptionDelete')->name('subscribe.delete');
     });
 

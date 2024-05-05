@@ -310,6 +310,7 @@
             font-weight: 500;
             color: #fd7212;
         }
+
         /* new css for subscription End */
     </style>
 @endsection
@@ -352,63 +353,68 @@
             <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="subscriptions">
-                        <div class="subscription-card">
-                            <div class="img-wrp">
-                                <img src="{{ asset('assets/img/subscription/Mask Group 111.png') }}"
-                                    alt="Subscription Image" />
-                                <div class="price">
-                                    <p>Basic</p>
-                                    <div class="price-plan">
-                                        <div class="monthly" onclick="togglePrice('monthly')">
-                                            <p>$69.95</p>
-                                            <p>per month</p>
+                        @if ($subsPlanLists->isNotEmpty())
+                            @foreach ($subsPlanLists as $subsPlanList)
+                                <div class="subscription-card">
+                                    <div class="img-wrp">
+                                        <img src="{{ asset('assets/img/subscription/Mask Group 111.png') }}"
+                                            alt="Subscription Image" />
+                                        <div class="price">
+                                            <p>Basic</p>
+                                            <div class="price-plan">
+                                                <div class="monthly" onclick="togglePrice('monthly')">
+                                                    <p>$69.95</p>
+                                                    <p>per month</p>
+                                                </div>
+                                                <div class="yearly" onclick="togglePrice('yearly')">
+                                                    <p>$69.95</p>
+                                                    <p>per year</p>
+                                                    <p>10% savings</p>
+                                                </div>
+                                                <div class="switch"></div>
+                                            </div>
                                         </div>
-                                        <div class="yearly" onclick="togglePrice('yearly')">
-                                            <p>$69.95</p>
-                                            <p>per year</p>
-                                            <p>10% savings</p>
+                                    </div>
+                                    <div class="subscription-details">
+                                        <p class="short-d">
+                                            Basic Plan is recommended for small businesses or infrequent
+                                            job posting.
+                                        </p>
+                                        <div class="points">
+                                            <ul>
+                                                <li>
+                                                    <img src="{{ asset('assets/img/subscription/pointer.svg') }}"
+                                                        alt="" class="pointer-icon" />Post up to 2
+                                                    active job ads at a time.
+                                                </li>
+                                                <li>
+                                                    <img src="{{ asset('assets/img/subscription/pointer.svg') }}"
+                                                        alt="" class="pointer-icon" />Post up to 2
+                                                    active job ads at a time.
+                                                </li>
+                                                <li>
+                                                    <img src="{{ asset('assets/img/subscription/pointer.svg') }}"
+                                                        alt="" class="pointer-icon" />Post up to 2
+                                                    active job ads at a time.
+                                                </li>
+                                                <li>
+                                                    <img src="{{ asset('assets/img/subscription/pointer.svg') }}"
+                                                        alt="" class="pointer-icon" />Post up to 2
+                                                    active job ads at a time. Post up to 2
+                                                    active job ads at a time
+                                                </li>
+                                            </ul>
+                                            {{-- <div class="view-btn">
+                                            <button class="view-more">View More</button>
+                                        </div> --}}
                                         </div>
-                                        <div class="switch"></div>
+                                        <button class="subscribe-button">Select</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="subscription-details">
-                                <p class="short-d">
-                                    Basic Plan is recommended for small businesses or infrequent
-                                    job posting.
-                                </p>
-                                <div class="points">
-                                    <ul>
-                                        <li>
-                                            <img src="{{ asset('assets/img/subscription/pointer.svg') }}" alt=""
-                                                class="pointer-icon" />Post up to 2
-                                            active job ads at a time.
-                                        </li>
-                                        <li>
-                                            <img src="{{ asset('assets/img/subscription/pointer.svg') }}" alt=""
-                                                class="pointer-icon" />Post up to 2
-                                            active job ads at a time.
-                                        </li>
-                                        <li>
-                                            <img src="{{ asset('assets/img/subscription/pointer.svg') }}" alt=""
-                                                class="pointer-icon" />Post up to 2
-                                            active job ads at a time.
-                                        </li>
-                                        <li>
-                                            <img src="{{ asset('assets/img/subscription/pointer.svg') }}" alt=""
-                                                class="pointer-icon" />Post up to 2
-                                            active job ads at a time. Post up to 2
-                                            active job ads at a time
-                                        </li>
-                                    </ul>
-                                    {{-- <div class="view-btn">
-                                        <button class="view-more">View More</button>
-                                    </div> --}}
-                                </div>
-                                <button class="subscribe-button">Select</button>
-                            </div>
-                        </div>
-                        <div class="subscription-card">
+                            @endforeach
+                        @endif
+
+                        {{-- <div class="subscription-card">
                             <div class="img-wrp">
                                 <div class="recommend-tab">
                                     <p>Recommended</p>
@@ -460,9 +466,9 @@
                                             active job ads at a time
                                         </li>
                                     </ul>
-                                    {{-- <div class="view-btn">
+                                    <div class="view-btn">
                                         <button class="view-more">View More</button>
-                                    </div> --}}
+                                    </div>
                                 </div>
                                 <button class="subscribe-button">Select</button>
                             </div>
@@ -507,7 +513,7 @@
                                 </div>
                                 <button class="subscribe-button">Select</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
