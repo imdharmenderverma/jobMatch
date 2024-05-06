@@ -1,5 +1,8 @@
 @extends('layouts.front-master')
 @section('page-css')
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
     <style>
         .table td,
         .table th {
@@ -360,25 +363,38 @@
                                         <img src="{{ asset('assets/img/subscription/Mask Group 111.png') }}"
                                             alt="Subscription Image" />
                                         <div class="price">
-                                            <p>Basic</p>
+                                            <p>{{ $subsPlanList->plan_name }}</p>
                                             <div class="price-plan">
-                                                <div class="monthly" onclick="togglePrice('monthly')">
-                                                    <p>$69.95</p>
-                                                    <p>per month</p>
-                                                </div>
-                                                <div class="yearly" onclick="togglePrice('yearly')">
-                                                    <p>$69.95</p>
-                                                    <p>per year</p>
-                                                    <p>10% savings</p>
-                                                </div>
-                                                <div class="switch"></div>
+                                                @if ($subsPlanList->plan_name == 'Freemium')
+                                                    <div class="free">
+                                                        <p>Free</p>
+                                                    </div>
+                                                @elseif ($subsPlanList->plan_name == 'Executive')
+                                                    <div class="free">
+                                                        <p>Customized</p>
+                                                    </div>
+                                                @else
+                                                    <div class="monthly" onclick="togglePrice('monthly')">
+                                                        @if ($subsPlanList->montly_price != null)
+                                                            <p>${{ $subsPlanList->montly_price }}</p>
+                                                            <p>per month</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="yearly" onclick="togglePrice('yearly')">
+                                                        @if ($subsPlanList->yearly_price != null)
+                                                            <p>${{ $subsPlanList->yearly_price }}</p>
+                                                            <p>per year</p>
+                                                            <p>10% savings</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="switch"></div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
                                     <div class="subscription-details">
                                         <p class="short-d">
-                                            Basic Plan is recommended for small businesses or infrequent
-                                            job posting.
+                                            {{ $subsPlanList->description }}
                                         </p>
                                         <div class="points">
                                             <ul>
@@ -412,6 +428,8 @@
                                     </div>
                                 </div>
                             @endforeach
+                        @else
+                            <h4 class="mt-5">No Subscription Plan Found!</h4>
                         @endif
 
                         {{-- <div class="subscription-card">
@@ -519,4 +537,9 @@
             </div>
         </div>
     </div>
+@endsection
+@section('page-js')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script src="{{ asset('assets/js/admin/recruiter/subscribe.js') }}"></script>
 @endsection
