@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\AppUserController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\IndustryController;
@@ -128,6 +129,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
             // Subscription routes
             Route::get('subscription', 'SubscriptionController@subscriptionList')->name('subscription');
             // Route::get('subscription', 'SubscriptionController@subscriptionAdd')->name('subscription');
+
+            // payment checkout routes
+            Route::get('/checkout/{id}', 'CheckoutController@index')->name('checkout');
 
             Route::get('faq-data', 'FaqController@faqIndexData')->name('faq-data');
 

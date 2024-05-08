@@ -27,11 +27,10 @@
                             </span>
                         </div> --}}
                     </div>
-                    <div class="col-md-2 add-btn state-btn">
-                        {{-- <button type="button"></button> --}}
+                    {{-- <div class="col-md-2 add-btn state-btn">
                         <a href="javascript:void(0)" class="anchorBtn add-btn-modal m-0 addskillBtn" data-bs-toggle="modal"
                             data-bs-target="#add-subscription-modal">Add a Plan</a>
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-12">
                         <div class="tab-content mt-2 mb-3 float-left w-100" id="">
